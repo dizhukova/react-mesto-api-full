@@ -63,10 +63,11 @@ app.use('/cards', cardsRoute);
 app.use(errorLogger);
 
 app.use(errors());
-app.use(error);
 
 app.use('/*', () => {
   throw new NotFoundError('Ресурс не найден');
 });
+
+app.use(error);
 
 module.exports = app;
