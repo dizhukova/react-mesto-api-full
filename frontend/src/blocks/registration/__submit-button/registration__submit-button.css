@@ -1,0 +1,28 @@
+.registration__submit-button {
+    margin-top: 216px;
+    width: 100%;
+    height: 50px;
+    padding: 0;
+    border: none;
+    background: #FFFFFF;
+    border-radius: 2px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+}
+
+.registration__submit-button:hover {
+    opacity: .85;
+}
+
+@media screen and (max-width: 576px) {
+    .registration__submit-button {
+        height: 46px;
+        margin-top: 173px;
+        font-size: 16px;
+        line-height: 19px;
+    }
+}

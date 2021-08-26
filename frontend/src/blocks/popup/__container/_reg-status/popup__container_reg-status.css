@@ -1,0 +1,13 @@
+.popup__container_reg-status { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 0;
+}
+
+@media screen and (max-width: 575px) {
+    .popup__container_reg-status {
+        padding: 50px 18px;
+    }
+}

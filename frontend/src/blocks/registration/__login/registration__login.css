@@ -1,0 +1,15 @@
+.registration__login {
+    margin-top: 15px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width: 576px) {
+    .registration__login {
+        margin-top: 20px;
+    }
+}

@@ -1,0 +1,11 @@
+.header__log-out {
+    margin-bottom: 46px;
+    background-color: transparent;
+    border: none;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: right;
+    color: #A9A9A9;
+}
