@@ -16,6 +16,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const NotFoundError = require('./errors/not-found-err'); // 404
 
+const { PORT = 3000 } = process.env;
 const app = express();
 
 const limiter = rateLimit({
@@ -64,10 +65,12 @@ app.use(errorLogger);
 
 app.use(errors());
 
-app.use('/*', () => {
+app.use('*', () => {
   throw new NotFoundError('Ресурс не найден');
 });
 
 app.use(error);
 
-module.exports = app;
+app.listen(PORT, () => {
+  console.log(`App listening on port ${PORT}`);
+});
