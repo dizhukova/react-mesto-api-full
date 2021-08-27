@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { Link, Route } from 'react-router-dom';
 import headerLogo from '../images/logo.svg';
