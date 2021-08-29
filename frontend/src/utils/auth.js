@@ -31,22 +31,22 @@ export const authorize = (email, password) => {
         body: JSON.stringify({ email, password })
     })
         .then(checkResponse)
-        // .then((data) => {
-        //     if (data.token) {
-        //         localStorage.setItem('token', data.token);
-        //         return data;
-        //     }
-        // });
+        .then((data) => {
+            if (data.token) {
+                localStorage.setItem('token', data.token);
+                return data.token;
+            }
+        });
 };
 
-export const checkToken = () => {
+export const checkToken = (token) => {
     return fetch(`${BASE_URL}/users/me`, {
         method: 'GET',
         credentials: 'include',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            // 'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`,
         }
     })
         .then(checkResponse);
