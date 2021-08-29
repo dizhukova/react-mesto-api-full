@@ -18,7 +18,6 @@ const cors = require('./middlewares/cors');
 const NotFoundError = require('./errors/not-found-err'); // 404
 
 const { PORT = 3000 } = process.env;
-console.log(process.env.NODE_ENV);
 
 const app = express();
 
@@ -81,6 +80,4 @@ app.use('*', () => {
 
 app.use(error);
 
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
-});
+app.listen(PORT);
