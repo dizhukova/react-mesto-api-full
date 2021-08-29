@@ -44,17 +44,17 @@ function App() {
       })
       .catch(err => console.log(err));
 
-    if (localStorage.getItem('jwt')) {
-      auth.checkToken(localStorage.getItem('jwt'))
-        .then((res) => {
-          setLoggedIn(true);
-          setUserEmail(res.data.email);
-          history.push('/');
-        })
-        .catch((err) => console.log(err));
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //   if (localStorage.getItem('jwt')) {
+  //     auth.checkToken(localStorage.getItem('jwt'))
+  //       .then((res) => {
+  //         setLoggedIn(true);
+  //         setUserEmail(res.data.email);
+  //         history.push('/');
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, []);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
