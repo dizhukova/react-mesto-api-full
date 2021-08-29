@@ -13,10 +13,13 @@ const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const error = require('./middlewares/error');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const cors = require('./middlewares/cors');
 
 const NotFoundError = require('./errors/not-found-err'); // 404
 
 const { PORT = 3000 } = process.env;
+console.log(process.env.NODE_ENV);
+
 const app = express();
 
 const limiter = rateLimit({
@@ -38,6 +41,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 app.use(requestLogger);
+app.use(cors);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
