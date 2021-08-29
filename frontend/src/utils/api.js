@@ -55,6 +55,7 @@ class Api {
     addCard({ name, link }) {
         return fetch(`${this._baseUrl}/cards`, {
             method: 'POST',
+            credentials: 'include',
             headers: this._headers,
             body: JSON.stringify({
                 name: `${name}`,
@@ -103,7 +104,6 @@ class Api {
 const api = new Api({
     baseUrl: 'https://api.mesto.dizhukova.nomoredomains.club',
     headers: {
-        authorization: '0bfe8642-03b6-4f4d-92cc-535741de9ca8',
         'Content-Type': 'application/json'
     }
 });
