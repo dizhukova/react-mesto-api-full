@@ -20,6 +20,7 @@ module.exports.login = (req, res, next) => {
           maxAge: 3600000 * 24 * 7,
           httpOnly: true,
           sameSite: true,
+          secure: true,
         })
         .send({ token });
     })
@@ -30,7 +31,7 @@ module.exports.login = (req, res, next) => {
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
-    .then((users) => res.send({ data: users }))
+    .then((users) => res.send(users))
     .catch(next);
 };
 
@@ -40,7 +41,7 @@ module.exports.getUserById = (req, res, next) => {
       if (user === null) {
         throw new NotFoundError('Пользователь по указанному _id не найден.');
       } else {
-        res.send({ data: user });
+        res.send(user);
       }
     })
     .catch((err) => {
@@ -58,7 +59,7 @@ module.exports.getCurrentUser = (req, res, next) => {
       if (user === null) {
         throw new NotFoundError('Пользователь по указанному _id не найден.');
       } else {
-        res.send({ data: user });
+        res.send(user);
       }
     })
     .catch((err) => {
@@ -113,7 +114,7 @@ module.exports.updateUser = (req, res, next) => {
       if (user === null) {
         throw new NotFoundError('Пользователь с указанным _id не найден.');
       } else {
-        res.send({ data: user });
+        res.send(user);
       }
     })
     .catch((err) => {
@@ -140,7 +141,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
       if (user === null) {
         throw new NotFoundError('Пользователь с указанным _id не найден.');
       } else {
-        res.send({ data: user });
+        res.send(user);
       }
     })
     .catch((err) => {

@@ -42,7 +42,7 @@ function App() {
         setCurrentUser(userData);
         setCards(cards);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
   }, [loggedIn]);
 
   useEffect(() => {
@@ -141,7 +141,7 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
@@ -183,7 +183,7 @@ function App() {
 
   function handleLogin({ email, password }) {
     auth.authorize(email, password)
-      .then((res) => {
+      .then(() => {
         handleCheckToken();
         setLoggedIn(true);
         setUserEmail(email);
@@ -199,7 +199,7 @@ function App() {
         setUserEmail('');
         setLoggedIn(false);
       })
-    .catch(err => console.log(err));
+      .catch(err => console.log(err));
   }
 
   return (

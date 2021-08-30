@@ -6,7 +6,7 @@ const NotFoundError = require('../errors/not-found-err'); // 404
 
 module.exports.getCards = (req, res, next) => {
   Card.find({})
-    .then((cards) => res.send({ data: cards }))
+    .then((cards) => res.send(cards))
     .catch(next);
 };
 
@@ -15,7 +15,7 @@ module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
 
   Card.create({ name, link, owner })
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         throw new BadRequestError('Переданы некорректные данные при создании карточки.');
@@ -32,10 +32,10 @@ module.exports.deleteCard = (req, res, next) => {
         throw new NotFoundError('Карточка с указанным _id не найдена.');
       }
       if (card.owner.toString() !== req.user._id) {
-        Card.deleteOne(card)
-          .then(() => res.send({ data: card }));
-      } else {
         throw new ForbiddenError('Недостаточно прав для удаления карточки.');
+      } else {
+        Card.deleteOne(card)
+          .then(() => res.send(card));
       }
     })
     .catch((err) => {
@@ -57,7 +57,7 @@ module.exports.likeCard = (req, res, next) => {
       if (card === null) {
         throw new NotFoundError('Карточка с указанным _id не найдена.');
       } else {
-        res.send({ data: card });
+        res.send(card);
       }
     })
     .catch((err) => {
@@ -79,7 +79,7 @@ module.exports.dislikeCard = (req, res, next) => {
       if (card === null) {
         throw new NotFoundError('Карточка с указанным _id не найдена.');
       } else {
-        res.send({ data: card });
+        res.send(card);
       }
     })
     .catch((err) => {

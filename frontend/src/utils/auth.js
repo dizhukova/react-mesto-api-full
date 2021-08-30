@@ -30,13 +30,6 @@ export const authorize = (email, password) => {
         },
         body: JSON.stringify({ email, password })
     })
-        // .then(checkResponse)
-        // .then((data) => {
-        //     if (data.token) {
-        //         localStorage.setItem('token', data.token);
-        //         return data.token;
-        //     }
-        // });
 };
 
 export const checkToken = () => {
@@ -46,7 +39,6 @@ export const checkToken = () => {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            // 'Authorization': `Bearer ${token}`,
         }
     })
         .then(checkResponse);

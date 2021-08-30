@@ -36,9 +36,9 @@ app.use(cors({
     'https://api.mesto.dizhukova.nomoredomains.club',
     'http://mesto.dizhukova.nomoredomains.club',
     'http://api.mesto.dizhukova.nomoredomains.club',
-    'https://localhost:3000',
+    'http://localhost:3000',
   ],
-  methods: ['GET', 'PUT', 'POST', 'DELETE'],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   allowedHeaders: ['Authorization', 'Content-Type'],
   credentials: true,
   optionsSuccessStatus: 200,
@@ -83,14 +83,12 @@ app.use(auth);
 app.use('/users', usersRoute);
 app.use('/cards', cardsRoute);
 
-app.use(errorLogger);
-
-app.use(errors());
-
 app.use('*', () => {
   throw new NotFoundError('Ресурс не найден');
 });
 
+app.use(errorLogger);
+app.use(errors());
 app.use(error);
 
 app.listen(PORT);
