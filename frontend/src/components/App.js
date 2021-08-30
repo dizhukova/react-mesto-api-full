@@ -43,18 +43,27 @@ function App() {
         setCards(cards);
       })
       .catch(err => console.log(err));
+  }, [loggedIn]);
 
-      if (localStorage.getItem('jwt')) {
-        auth.checkToken(localStorage.getItem('jwt'))
-          .then((res) => {
-            setLoggedIn(true);
-            setUserEmail(res.data.email);
-            history.push('/');
-          })
-          .catch((err) => console.log(err));
-      }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useEffect(() => {
+    if (loggedIn) {
+      history.push('/')
+    }
+  }, [loggedIn, history]);
+
+  const handleCheckToken = React.useCallback(() => {
+    auth.checkToken()
+      .then((res) => {
+        setLoggedIn(true);
+        setUserEmail(res.email);
+        history.push('/');
+      })
+      .catch((err) => console.log(err))
+  }, [history]);
+
+  useEffect(() => {
+    handleCheckToken();
+  }, [handleCheckToken]);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -162,7 +171,7 @@ function App() {
         setIsInfoTooltipOpen(true);
         setStatusIcon(successIcon);
         setStatusMessage('Вы успешно зарегистрировались!');
-        history.push('/sign-in');
+        history.push('/signin');
       })
       .catch(err => {
         setIsInfoTooltipOpen(true);
@@ -175,19 +184,22 @@ function App() {
   function handleLogin({ email, password }) {
     auth.authorize(email, password)
       .then((res) => {
+        handleCheckToken();
         setLoggedIn(true);
         setUserEmail(email);
-        localStorage.setItem('jwt', res.token);
         history.push('/');
       })
       .catch(err => console.log(err));
   }
 
   function handleLogOut() {
-    history.push('/sign-in');
-    setUserEmail('');
-    setLoggedIn(false);
-    localStorage.removeItem('jwt');
+    auth.signOut()
+      .then(() => {
+        history.push('/signin');
+        setUserEmail('');
+        setLoggedIn(false);
+      })
+    .catch(err => console.log(err));
   }
 
   return (
@@ -203,10 +215,10 @@ function App() {
           onCardLike={handleCardLike}
           onCardDelete={handleCardDelete}
         />
-        <Route path="/sign-up">
+        <Route path="/signup">
           <Register onRegister={handleRegister} />
         </Route>
-        <Route path="/sign-in">
+        <Route path="/signin">
           <Login onLogin={handleLogin} />
         </Route>
       </Switch>

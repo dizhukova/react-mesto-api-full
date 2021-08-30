@@ -10,7 +10,7 @@ const cors = require('cors');
 
 const usersRoute = require('./routes/users');
 const cardsRoute = require('./routes/cards');
-const { login, createUser } = require('./controllers/users');
+const { login, createUser, signOut } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const error = require('./middlewares/error');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -75,6 +75,8 @@ app.post('/signup', celebrate({
     avatar: Joi.string().pattern(/https?:\/\/(www\.)?[a-zA-Z0-9\-.]{1,}\.[a-z]{1,5}([/a-zA-Z0-9\-._~:/?#[\]@!$&'()*+,;=]*)/),
   }),
 }), createUser);
+
+app.delete('/signout', signOut);
 
 app.use(auth);
 

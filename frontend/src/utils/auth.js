@@ -30,24 +30,32 @@ export const authorize = (email, password) => {
         },
         body: JSON.stringify({ email, password })
     })
-        .then(checkResponse)
-        .then((data) => {
-            if (data.token) {
-                localStorage.setItem('token', data.token);
-                return data.token;
-            }
-        });
+        // .then(checkResponse)
+        // .then((data) => {
+        //     if (data.token) {
+        //         localStorage.setItem('token', data.token);
+        //         return data.token;
+        //     }
+        // });
 };
 
-export const checkToken = (token) => {
+export const checkToken = () => {
     return fetch(`${BASE_URL}/users/me`, {
         method: 'GET',
         credentials: 'include',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            // 'Authorization': `Bearer ${token}`,
         }
+    })
+        .then(checkResponse);
+}
+
+export const signOut = () => {
+    return fetch(`${BASE_URL}/signout`, {
+        method: 'DELETE',
+        credentials: 'include',
     })
         .then(checkResponse);
 }

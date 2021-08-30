@@ -13,7 +13,7 @@ function RegistrationForm(props) {
                     {props.name === 'register' &&
                         <div className="registration__login">
                             <p className="registration__login-caption">Уже зарегистрированы?&nbsp;</p>
-                            <Link to="/sign-in" className="registration__login-link">Войти</Link>
+                            <Link to="/signin" className="registration__login-link">Войти</Link>
                         </div>
                     }
                 </fieldset>

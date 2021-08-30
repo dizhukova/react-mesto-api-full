@@ -15,10 +15,10 @@ function Header(props) {
             <a href="#" target="_blank">
                 <img className="header__logo" src={headerLogo} alt="Логотип Mesto" />
             </a>
-            <Route path="/sign-up">
+            <Route path="/signup">
                 <Link className="header__auth-button" to="sign-in">Войти</Link>
             </Route>
-            <Route path="/sign-in">
+            <Route path="/signin">
                 <Link className="header__auth-button" to="sign-up">Регистрация</Link>
             </Route>
         </header>
